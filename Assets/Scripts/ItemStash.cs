@@ -5,6 +5,7 @@ public class ItemStash : ItemContainer
 {
     [SerializeField] KeyCode openKeyCode = KeyCode.E;
     [SerializeField] Transform itemsParent;
+    [SerializeField] UIInputController uIInputController;
 
     private bool isInRange;
     private bool isOpen;
@@ -29,12 +30,20 @@ public class ItemStash : ItemContainer
         if (isInRange && Input.GetKeyDown(openKeyCode))
         {
             isOpen = !isOpen;
-            itemsParent.gameObject.SetActive(isOpen);
+            //itemsParent.gameObject.SetActive(isOpen);
 
             if (isOpen)
+            {
+                uIInputController.ModifyUIElement(itemsParent.gameObject);
                 character.OpenItemContainer(this);
+            }
+                
             else
+            {
+                uIInputController.ModifyUIElement(itemsParent.gameObject);
                 character.CloseItemContainer(this);
+            }
+                
 
         }
     }
