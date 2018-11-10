@@ -220,4 +220,64 @@ public class Character : MonoBehaviour
         statPanel.UpdateStatValues();
     }
 
+    private ItemContainer openItemContainer;
+
+    private void TransferToItemContainer(BaseItemSlot itemSlot)
+    {
+        Item item = itemSlot.Item;
+        if (item != null && openItemContainer.CanAddItem(item))
+        {
+            inventory.RemoveItem(item);
+            openItemContainer.AddItem(item);
+        }
+    }
+
+    private void TransferToInventory(BaseItemSlot itemSlot)
+    {
+        Item item = itemSlot.Item;
+        if (item != null && inventory.CanAddItem(item))
+        {
+            openItemContainer.RemoveItem(item);
+            inventory.AddItem(item);
+        }
+    }
+
+    public void OpenItemContainer(ItemContainer itemContainer)
+    {
+        Debug.Log("test " + itemContainer);
+        openItemContainer = itemContainer;
+
+        inventory.OnRightClickEvent -= InventoryRightClick;
+        inventory.OnRightClickEvent += TransferToItemContainer;
+
+        itemContainer.OnRightClickEvent += TransferToInventory;
+
+        itemContainer.OnPointerEnterEvent += ShowTooltip;
+        itemContainer.OnPointerExitEvent += HideTooltip;
+        itemContainer.OnBeginDragEvent += BeginDrag;
+        itemContainer.OnEndDragEvent += EndDrag;
+        itemContainer.OnDragEvent += Drag;
+        itemContainer.OnDropEvent += Drop;
+
+
+    }
+
+    public void CloseItemContainer(ItemContainer itemContainer)
+    {
+        Debug.Log("test " + itemContainer);
+        openItemContainer = null;
+
+        inventory.OnRightClickEvent += InventoryRightClick;
+        inventory.OnRightClickEvent -= TransferToItemContainer;
+
+        itemContainer.OnRightClickEvent -= TransferToInventory;
+
+        itemContainer.OnPointerEnterEvent -= ShowTooltip;
+        itemContainer.OnPointerExitEvent -= HideTooltip;
+        itemContainer.OnBeginDragEvent -= BeginDrag;
+        itemContainer.OnEndDragEvent -= EndDrag;
+        itemContainer.OnDragEvent -= Drag;
+        itemContainer.OnDropEvent -= Drop;
+    }
+
 }
