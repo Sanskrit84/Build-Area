@@ -16,7 +16,8 @@ public class BaseItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     protected bool isPointerOver;
 
     protected Color normalColor = Color.white;
-    protected Color disabledColor = new Color(1, 1, 1, 0);
+    //protected Color disabledColor = new Color(1, 1, 1, 0);
+    protected Color disabledColor = Color.white;
 
     protected Item _item;
     public Item Item
@@ -29,6 +30,7 @@ public class BaseItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
             if (_item == null)
             {
                 image.color = disabledColor;
+                image.sprite = null;
             }
             else
             {

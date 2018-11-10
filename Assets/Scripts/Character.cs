@@ -18,6 +18,8 @@ public class Character : MonoBehaviour
     [SerializeField] StatPanel statPanel;
     [SerializeField] ItemTooltip itemTooltip;
     [SerializeField] Image draggableItem;
+    [SerializeField] DropItemArea dropItemArea;
+    [SerializeField] QuestionDialog questionDialog;
 
     private BaseItemSlot dragItemSlot;
 
@@ -61,7 +63,7 @@ public class Character : MonoBehaviour
         //Drop
         inventory.OnDropEvent += Drop;
         equipmentPanel.OnDropEvent += Drop;
-
+        dropItemArea.OnDropEvent += DropItemOutsideUI;
     }
 
     private void InventoryRightClick(BaseItemSlot itemSlot)
@@ -141,7 +143,23 @@ public class Character : MonoBehaviour
         {
             SwapItems(dropItemSlot);
         }
+    }
 
+    private void DropItemOutsideUI()
+    {
+        if (dragItemSlot == null) return;
+
+        questionDialog.Show();
+        BaseItemSlot baseItemSlot = dragItemSlot;
+        questionDialog.OnYesEvent += () => DestroyItemInSlot(baseItemSlot);
+
+
+    }
+
+    private void DestroyItemInSlot(BaseItemSlot baseItemSlot)
+    {
+        baseItemSlot.Item.Destroy();
+        baseItemSlot.Item = null;
     }
 
     private void SwapItems(BaseItemSlot dropItemSlot)
@@ -244,7 +262,6 @@ public class Character : MonoBehaviour
 
     public void OpenItemContainer(ItemContainer itemContainer)
     {
-        Debug.Log("test " + itemContainer);
         openItemContainer = itemContainer;
 
         inventory.OnRightClickEvent -= InventoryRightClick;
@@ -264,7 +281,6 @@ public class Character : MonoBehaviour
 
     public void CloseItemContainer(ItemContainer itemContainer)
     {
-        Debug.Log("test " + itemContainer);
         openItemContainer = null;
 
         inventory.OnRightClickEvent += InventoryRightClick;
