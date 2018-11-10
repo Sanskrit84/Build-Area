@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79412ea2e6e0b942a4595d2cacddade, type: 3}
+  m_Name: Armour
+  m_EditorClassIdentifier: 
+  id: 6a652c7e52f9a4a48966db07c0c0eb85
+  ItemName: Armour
+  Icon: {fileID: 21300000, guid: 73d29a1bc29c1af4bb0f7a01cf7facd2, type: 3}
+  MaximumStacks: 1
+  StrengthBonus: 2
+  AgilityBonus: 1
+  IntelligenceBonus: 1
+  VitalityBonus: 5
+  StrengthPercentBonus: 0
+  AgilityPercentBonus: 0
+  IntelligencePercentBonus: 0
+  VitalityPercentBonus: 0
+  EquipmentType: 1
