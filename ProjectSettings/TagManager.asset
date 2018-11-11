@@ -7,6 +7,7 @@ TagManager:
   - Equiped
   - tree
   - Counter
+  - Inventory
   layers:
   - Default
   - TransparentFX

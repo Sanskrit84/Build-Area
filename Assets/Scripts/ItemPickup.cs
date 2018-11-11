@@ -13,7 +13,6 @@ public class ItemPickup : MonoBehaviour
     {
         if (isInRange && Input.GetKeyDown(itemPickupKeyCode))
         {
-
             inventory.AddItem(item.GetCopy());
             Destroy(this.gameObject);
         }
@@ -33,6 +32,11 @@ public class ItemPickup : MonoBehaviour
         {
             isInRange = false;
         }
+    }
+
+    public void GetInventory(Inventory characterInventory)
+    {
+        inventory = characterInventory;
     }
 
 }

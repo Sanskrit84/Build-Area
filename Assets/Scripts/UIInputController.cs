@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class UIInputController : MonoBehaviour
 {
-    private List<string> openUIElements = new List<string>();
+    [SerializeField] private List<string> openUIElements = new List<string>();
     [SerializeField] UnityStandardAssets.Characters.FirstPerson.FirstPersonController FPC;
     [Space]
     [SerializeField] GameObject inventoryGameObject;

@@ -23,6 +23,8 @@ public class Character : MonoBehaviour
 
     private BaseItemSlot dragItemSlot;
 
+    public Inventory inv;
+
     private void Validate()
     {
         if (itemTooltip == null)
@@ -64,6 +66,8 @@ public class Character : MonoBehaviour
         inventory.OnDropEvent += Drop;
         equipmentPanel.OnDropEvent += Drop;
         dropItemArea.OnDropEvent += DropItemOutsideUI;
+
+        inv = inventory;
     }
 
     private void InventoryRightClick(BaseItemSlot itemSlot)

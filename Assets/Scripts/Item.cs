@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using UnityEngine;
 using UnityEditor;
-using Kryz.CharacterStats;
 
 [CreateAssetMenu(menuName = "Items/Item")]
 public class Item : ScriptableObject

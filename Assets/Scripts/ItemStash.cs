@@ -30,17 +30,17 @@ public class ItemStash : ItemContainer
         if (isInRange && Input.GetKeyDown(openKeyCode))
         {
             isOpen = !isOpen;
-            //itemsParent.gameObject.SetActive(isOpen);
+            itemsParent.gameObject.SetActive(isOpen);
 
             if (isOpen)
             {
-                uIInputController.ModifyUIElement(itemsParent.gameObject);
+                itemsParent.gameObject.SetActive(true);
                 character.OpenItemContainer(this);
             }
                 
             else
             {
-                uIInputController.ModifyUIElement(itemsParent.gameObject);
+                itemsParent.gameObject.SetActive(false);
                 character.CloseItemContainer(this);
             }
                 
