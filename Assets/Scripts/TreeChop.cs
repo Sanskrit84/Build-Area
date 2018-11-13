@@ -5,7 +5,8 @@ using UnityEngine;
 public class TreeChop : MonoBehaviour
 {
     [SerializeField] GameObject logs;
-    [SerializeField] Inventory inventory;
+    [SerializeField] GameObject invGroup;
+
 
     //Variables
     GameObject thisTree;
@@ -44,27 +45,28 @@ public class TreeChop : MonoBehaviour
     private IEnumerator destroyTree()
     {
         GameObject go = new GameObject();
+        //Vector3 position = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
         Vector3 position;
         float spacing;
-        //Quaternion direction = new Quaternion(transform.rotation.x, transform.localEulerAngles.y - 90, transform.localEulerAngles.z + 90, transform.rotation.w);
-
+        yield return new WaitForSeconds(7);
         for (int i = 0; i < LogCount; i++)
         {
+
             spacing = i * 2.1f;
             position = new Vector3(transform.position.x, (transform.position.y + spacing), transform.position.z);
 
-            //GameObject go = (GameObject)Instantiate(logs, position, new Quaternion(transform.rotation.x, transform.localEulerAngles.y -90, transform.localEulerAngles.z + 90, transform.rotation.w));
-            go.transform.parent = this.transform;
+            go.transform.SetParent(thisTree.transform);
             go.SetActive(false);
-            go = (GameObject)Instantiate(logs, position, transform.rotation);
-            
+            go = (GameObject)Instantiate(logs, position, Quaternion.identity);
 
             ItemPickup itemPickup = go.GetComponent<ItemPickup>();
-            itemPickup.GetInventory(inventory);
+            //Inventory inventory = null;
+                
+            //itemPickup.GetInventory(inventory);
         }
-        //transform.rotation.x, transform.rotation.y - 90, transform.rotation.z + 90, transform.rotation.w
-        yield return new WaitForSeconds(10);
-        Destroy(thisTree);
+
+        
+        //Destroy(thisTree);
         go.SetActive(true);
     }
 }

@@ -9,6 +9,14 @@ public class ItemPickup : MonoBehaviour
 
     private bool isInRange;
 
+    private void Start()
+    {
+        if (inventory == null)
+        {
+            inventory = FindObjectOfType<Inventory>();
+        }
+    }
+
     private void Update()
     {
         if (isInRange && Input.GetKeyDown(itemPickupKeyCode))
@@ -16,6 +24,7 @@ public class ItemPickup : MonoBehaviour
             inventory.AddItem(item.GetCopy());
             Destroy(this.gameObject);
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,9 +43,5 @@ public class ItemPickup : MonoBehaviour
         }
     }
 
-    public void GetInventory(Inventory characterInventory)
-    {
-        inventory = characterInventory;
-    }
 
 }

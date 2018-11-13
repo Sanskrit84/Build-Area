@@ -31,7 +31,7 @@ public class UIInputController : MonoBehaviour
         {
             if (Input.GetKeyDown(toggleInventoryKeys[i]))
             {
-                ModifyUIElement(inventoryGameObject);
+                ModifyUIElement(inventoryGameObject.transform.GetChild(0).gameObject);
                 break;
             }
         }

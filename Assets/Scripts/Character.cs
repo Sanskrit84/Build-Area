@@ -67,7 +67,7 @@ public class Character : MonoBehaviour
         equipmentPanel.OnDropEvent += Drop;
         dropItemArea.OnDropEvent += DropItemOutsideUI;
 
-        inv = inventory;
+        //inv = inventory;
     }
 
     private void InventoryRightClick(BaseItemSlot itemSlot)
