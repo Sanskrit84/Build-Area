@@ -19,7 +19,7 @@ public class TreeChop : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        thisTree = transform.parent.gameObject;
+        thisTree = transform.gameObject;
     }
 
     // Update is called once per frame
@@ -48,25 +48,25 @@ public class TreeChop : MonoBehaviour
         //Vector3 position = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
         Vector3 position;
         float spacing;
-        yield return new WaitForSeconds(7);
+        
         for (int i = 0; i < LogCount; i++)
         {
-
+            go.transform.parent = thisTree.transform;
+            go.transform.GetComponent<Rigidbody>().isKinematic = true;
             spacing = i * 2.1f;
-            position = new Vector3(transform.position.x, (transform.position.y + spacing), transform.position.z);
+            position = new Vector3(transform.position.x, transform.position.y + spacing, transform.position.z);
 
-            go.transform.SetParent(thisTree.transform);
-            go.SetActive(false);
-            go = (GameObject)Instantiate(logs, position, Quaternion.identity);
-
-            ItemPickup itemPickup = go.GetComponent<ItemPickup>();
-            //Inventory inventory = null;
-                
-            //itemPickup.GetInventory(inventory);
+            go = Instantiate(logs, position, Quaternion.identity);
+            
+            
+            
+            
         }
-
-        
-        //Destroy(thisTree);
+        yield return new WaitForSeconds(7);
+        go.transform.GetComponent<Rigidbody>().isKinematic = false;
+        Destroy(thisTree);
         go.SetActive(true);
+        //Destroy(thisTree);
+
     }
 }
