@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0822aa7a0b2d64a8d9da5820b2d367, type: 3}
+  m_Name: Oregon Log
+  m_EditorClassIdentifier: 
+  id: 6fd505b4e0933174f8ef5dda3033b2d3
+  ItemName: Oregon Log
+  Icon: {fileID: 21300000, guid: 35ff7fcce2a7eef43b64abe46173efa2, type: 3}
+  MaximumStacks: 1
+  Tier: 1
+  mc: 12
+  sg: 50
+  mor: 52000
+  moe: 7800
+  wml: 84
+  ib: 990
+  cpag: 24200
+  cpeg: 3700
+  spg: 8200
+  tpg: 4100
+  sh: 3500

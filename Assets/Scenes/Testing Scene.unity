@@ -32664,6 +32664,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f279991de41650b4c9e2473ee6baee0d, type: 2}
   - {fileID: 11400000, guid: f279991de41650b4c9e2473ee6baee0d, type: 2}
   - {fileID: 11400000, guid: f279991de41650b4c9e2473ee6baee0d, type: 2}
+  - {fileID: 11400000, guid: 6fd505b4e0933174f8ef5dda3033b2d3, type: 2}
   itemsParent: {fileID: 676287895}
 --- !u!1 &1900977368
 GameObject:
@@ -36249,7 +36250,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 35ff7fcce2a7eef43b64abe46173efa2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
