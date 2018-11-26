@@ -54,7 +54,7 @@ public class ItemPickup : MonoBehaviour
         }
     }
 
-    private void RemoveFromWorkspace()
+    public void RemoveFromWorkspace()
     {
         //Remove from Workspace Inventory
         workspaceInventory.RemoveItem(item.GetCopy());

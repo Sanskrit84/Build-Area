@@ -6,6 +6,9 @@ using System;
 public class Character : MonoBehaviour
 {
     public int Health = 50;
+    public int Stamina = 50;
+    public int Mind = 50;
+    public int Morale = 50;
 
     public CharacterStat Strength;
     public CharacterStat Agility;
