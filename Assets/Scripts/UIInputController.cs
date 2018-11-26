@@ -10,10 +10,12 @@ public class UIInputController : MonoBehaviour
     [SerializeField] GameObject CharacterPanelGameObject;
     [SerializeField] GameObject CraftingPanelGameObject;
     [SerializeField] GameObject PrototypePanelGameObject;
+    [SerializeField] GameObject workspaceInventoryGameObject;
     [SerializeField] KeyCode[] toggleInventoryKeys;
     [SerializeField] KeyCode[] toggleCharacterPanelKeys;
     [SerializeField] KeyCode[] toggleCraftingPanelKeys;
     [SerializeField] KeyCode[] togglePrototypePanelKeys;
+    [SerializeField] KeyCode[] toggleWorkspaceInventoryPanelKeys;
     [Space]
     [SerializeField] ItemTooltip itemTooltip;
     [SerializeField] StatTooltip statTooltip;
@@ -62,6 +64,15 @@ public class UIInputController : MonoBehaviour
             if (Input.GetKeyDown(togglePrototypePanelKeys[i]))
             {
                 ModifyUIElement(PrototypePanelGameObject);
+                break;
+            }
+        }
+
+        for (int i = 0; i < toggleWorkspaceInventoryPanelKeys.Length; i++)
+        {
+            if (Input.GetKeyDown(toggleWorkspaceInventoryPanelKeys[i]))
+            {
+                ModifyUIElement(workspaceInventoryGameObject.transform.GetChild(0).gameObject);
                 break;
             }
         }

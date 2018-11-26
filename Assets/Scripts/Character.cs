@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     public CharacterStat Vitality;
 
     [SerializeField] Inventory inventory;
+    [SerializeField] WorkspaceInventory workspaceInventory;
     [SerializeField] EquipmentPanel equipmentPanel;
     [SerializeField] CraftingWindow craftingWindow;
     [SerializeField] StatPanel statPanel;
@@ -49,19 +50,26 @@ public class Character : MonoBehaviour
         inventory.OnPointerEnterEvent += ShowTooltip;
         equipmentPanel.OnPointerEnterEvent += ShowTooltip;
         craftingWindow.OnPointerEnterEvent += ShowTooltip;
+        workspaceInventory.OnPointerEnterEvent += ShowTooltip;
+
         //Pointer Exit
         inventory.OnPointerExitEvent += HideTooltip;
         equipmentPanel.OnPointerExitEvent += HideTooltip;
         craftingWindow.OnPointerExitEvent += HideTooltip;
+        workspaceInventory.OnPointerExitEvent += HideTooltip;
+
         //Begin Drag
         inventory.OnBeginDragEvent += BeginDrag;
         equipmentPanel.OnBeginDragEvent += BeginDrag;
+
         //End Drag
         inventory.OnEndDragEvent += EndDrag;
         equipmentPanel.OnEndDragEvent += EndDrag;
+
         //Drag
         inventory.OnDragEvent += Drag;
         equipmentPanel.OnDragEvent += Drag;
+
         //Drop
         inventory.OnDropEvent += Drop;
         equipmentPanel.OnDropEvent += Drop;

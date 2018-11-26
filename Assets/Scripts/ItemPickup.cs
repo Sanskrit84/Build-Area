@@ -5,9 +5,11 @@ public class ItemPickup : MonoBehaviour
 {
     [SerializeField] Item item;
     [SerializeField] Inventory inventory;
+    [SerializeField] WorkspaceInventory workspaceInventory;
     [SerializeField] KeyCode itemPickupKeyCode = KeyCode.E;
 
     private bool isInRange;
+    private bool inWorkspace;
 
     private void Start()
     {
@@ -23,8 +25,16 @@ public class ItemPickup : MonoBehaviour
         {
             inventory.AddItem(item.GetCopy());
             Destroy(this.gameObject);
+            RemoveFromWorkspace();
+            return;
         }
 
+        if (isInRange && !inWorkspace)
+        {
+            //Add to Workpspace Inventory
+            workspaceInventory.AddItem(item.GetCopy());
+            inWorkspace = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,7 +50,15 @@ public class ItemPickup : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             isInRange = false;
+            RemoveFromWorkspace();
         }
+    }
+
+    private void RemoveFromWorkspace()
+    {
+        //Remove from Workspace Inventory
+        workspaceInventory.RemoveItem(item.GetCopy());
+        inWorkspace = false;
     }
 
 
