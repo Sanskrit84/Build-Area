@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef548922f79df274a95d9fba8e973fef, type: 3}
-  m_Name: Health Potion
+  m_Name: Poison
   m_EditorClassIdentifier: 
-  id: a55acf88f5756204986ff6787dbd265a
+  id: 5d469f3be941cd14b94361dc66e6fa66
   ItemName: Small Health Potion
-  Icon: {fileID: 21300000, guid: 1745e8f9b3d3def488396fd75eba7c8b, type: 3}
+  Icon: {fileID: 21300000, guid: cbac9fba88592964f903b07d9f26ec5c, type: 3}
   MaximumStacks: 10
   IsConsumable: 1
   Effects:
-  - {fileID: 11400000, guid: 66482054ce9e8ea4dbf0ccdcccf1631c, type: 2}
+  - {fileID: 11400000, guid: 469acb2d1fc855244b1d2cc18952b305, type: 2}

@@ -5,11 +5,32 @@ using System;
 
 public class Character : MonoBehaviour
 {
-    public int Health = 50;
-    public int Stamina = 50;
-    public int Mind = 50;
-    public int Morale = 50;
 
+    [Header("Health Bar")]
+    public CharacterStat Health;
+    public CharacterStat Regeneration;
+    public CharacterStat Resistance;
+    public CharacterStat Vigour;
+
+    [Header("Stamina Bar")]
+    public CharacterStat Stamina;
+    public CharacterStat Recovery;
+    public CharacterStat Resilience;
+    public CharacterStat Hardiness;
+
+    [Header("Cognition Bar")]
+    public CharacterStat Cognition;
+    public CharacterStat Recall;
+    public CharacterStat Focus;
+    public CharacterStat Awareness;
+
+    [Header("Morale Bar")]
+    public CharacterStat Morale;
+    public CharacterStat Courage;
+    public CharacterStat Fortitude;
+    public CharacterStat Determination;
+
+    [Header("Basic Stats")]
     public CharacterStat Strength;
     public CharacterStat Agility;
     public CharacterStat Intelligence;
@@ -24,10 +45,9 @@ public class Character : MonoBehaviour
     [SerializeField] Image draggableItem;
     [SerializeField] DropItemArea dropItemArea;
     [SerializeField] QuestionDialog questionDialog;
+    [SerializeField] UIHUD uIHud;
 
     private BaseItemSlot dragItemSlot;
-
-    public Inventory inv;
 
     private void Validate()
     {
@@ -42,8 +62,11 @@ public class Character : MonoBehaviour
         if (itemTooltip == null)
             itemTooltip = FindObjectOfType<ItemTooltip>();
 
-        statPanel.SetStats(Strength, Agility, Intelligence, Vitality);
+        statPanel.SetStats(Health, Regeneration, Resistance, Vigour, Stamina, Recovery, Resilience, Hardiness, Cognition, Recall, Focus, Awareness, Morale, Courage, Fortitude, Determination, Strength, Agility, Intelligence, Vitality);
         statPanel.UpdateStatValues();
+
+        uIHud.SetStats(Health, Regeneration, Resistance, Vigour, Stamina, Recovery, Resilience, Hardiness, Cognition, Recall, Focus, Awareness,  Morale, Courage, Fortitude, Determination);
+        uIHud.UpdateStatValues();
 
         //Setup Events
         //Right Click
@@ -78,7 +101,6 @@ public class Character : MonoBehaviour
         equipmentPanel.OnDropEvent += Drop;
         dropItemArea.OnDropEvent += DropItemOutsideUI;
 
-        //inv = inventory;
     }
 
     private void InventoryRightClick(BaseItemSlot itemSlot)

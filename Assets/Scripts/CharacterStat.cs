@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using UnityEngine;
 
 namespace Kryz.CharacterStats
 {
@@ -8,7 +9,9 @@ namespace Kryz.CharacterStats
     [Serializable]
     public class CharacterStat
     {
+        public float MinValue;
         public float BaseValue;
+        public float MaxValue;
 
         public float Value
         {
@@ -47,6 +50,31 @@ namespace Kryz.CharacterStats
             isDirty = true;
             statModifiers.Add(mod);
             statModifiers.Sort(CompareModifierOrder);
+        }
+
+        public virtual void AddFlatModifier(int mod)
+        {
+            int sign = Math.Sign(mod);
+            isDirty = true;
+
+            if (mod + _value >= MaxValue && sign == 1)
+            {
+                _value = MaxValue;
+            }
+            else if (MaxValue - _value > mod && sign == 1)
+            {
+                _value += mod;
+            }
+            else if(sign == -1)
+            {
+                _value = _value + mod;
+                Debug.Log("Negative Number " + mod);
+            }
+            else
+            {
+                Debug.Log("Can't Math");
+            }
+            
         }
 
         protected virtual int CompareModifierOrder(StatModifier a, StatModifier b)

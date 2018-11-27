@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Kryz.CharacterStats;
 
 [CreateAssetMenu(menuName = "Item Effects/Heal")]
 public class HealthItemEffect : UsableItemEffect
@@ -7,7 +8,7 @@ public class HealthItemEffect : UsableItemEffect
 
     public override void ExecuteEffect(UsableItem parentitem, Character character)
     {
-        character.Health += HealthAmount;
+        character.Health.AddFlatModifier(HealthAmount);
     }
 
     public override string GetDescription()
