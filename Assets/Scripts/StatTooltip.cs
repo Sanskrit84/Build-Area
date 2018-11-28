@@ -55,17 +55,17 @@ public class StatTooltip : MonoBehaviour
         sb.Length = 0;
         sb.Append(statName);
         sb.Append(" ");
-        sb.Append(stat.Value);
+        sb.Append(stat.MaxValue);
 
-        if (stat.Value != stat.BaseValue)
+        if (stat.MaxValue != stat.BaseValue)
         {
             sb.Append(" (");
             sb.Append(stat.BaseValue);
 
-            if (stat.Value > stat.BaseValue)
+            if (stat.MaxValue > stat.BaseValue)
                 sb.Append("+");
 
-            sb.Append(System.Math.Round(stat.Value - stat.BaseValue, 4));
+            sb.Append(System.Math.Round(stat.MaxValue - stat.BaseValue, 4));
             sb.Append(")");
         }
         return sb.ToString();
@@ -87,11 +87,10 @@ public class StatTooltip : MonoBehaviour
             {
                 sb.Append(mod.Value);
             }
-            else
+            if (mod.Type == StatModType.PercentAdd || mod.Type == StatModType.PercentMult)
             {
                 sb.Append(mod.Value * 100);
                 sb.Append("%");
-
             }
 
 

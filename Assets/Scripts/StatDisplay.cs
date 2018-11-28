@@ -53,7 +53,7 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void UpdateStatValue()
     {
-        valueText.text = _stat.Value.ToString();
+        valueText.text = _stat.MaxValue.ToString();
     }
 
 }

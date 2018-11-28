@@ -100,8 +100,9 @@ public class Character : MonoBehaviour
         inventory.OnDropEvent += Drop;
         equipmentPanel.OnDropEvent += Drop;
         dropItemArea.OnDropEvent += DropItemOutsideUI;
-
     }
+
+
 
     private void InventoryRightClick(BaseItemSlot itemSlot)
     {
@@ -113,6 +114,8 @@ public class Character : MonoBehaviour
         {
             UsableItem usableItem = (UsableItem)itemSlot.Item;
             usableItem.Use(this);
+            uIHud.UpdateStatValues();
+            statPanel.UpdateStatValues();
 
             if (usableItem.IsConsumable)
             {

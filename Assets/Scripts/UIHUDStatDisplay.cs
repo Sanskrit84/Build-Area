@@ -39,7 +39,6 @@ public class UIHUDStatDisplay : MonoBehaviour
         slider.minValue = _stat.MinValue;
         slider.maxValue = _stat.MaxValue;
         slider.value = _stat.Value;
-        
     }
 
 }

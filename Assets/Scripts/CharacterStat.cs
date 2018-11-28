@@ -11,25 +11,28 @@ namespace Kryz.CharacterStats
     {
         public float MinValue;
         public float BaseValue;
-        public float MaxValue;
+        public float Value;
 
-        public float Value
+        public float MaxValue
         {
             get
             {
-                if (isDirty || BaseValue != lastBaseValue)
+                if (isMaxValueDirty || BaseValue != lastBaseValue)
                 {
                     lastBaseValue = BaseValue;
-                    _value = CalculateFinalValue();
-                    isDirty = false;
+                    _maxValue = CalculateFinalValue();
+                    isMaxValueDirty = false;
                 }
-                return _value;
+                return _maxValue;
             }
         }
 
-        protected bool isDirty = true;
-        protected float _value;
+        protected bool isMaxValueDirty = true;
+        protected bool isValueDirty = true;
+        protected bool isZero = false;
+        protected float _maxValue;
         protected float lastBaseValue = float.MinValue;
+
 
         protected readonly List<StatModifier> statModifiers;
         public readonly ReadOnlyCollection<StatModifier> StatModifiers;
@@ -47,34 +50,9 @@ namespace Kryz.CharacterStats
 
         public virtual void AddModifier(StatModifier mod)
         {
-            isDirty = true;
+            isMaxValueDirty = true;
             statModifiers.Add(mod);
             statModifiers.Sort(CompareModifierOrder);
-        }
-
-        public virtual void AddFlatModifier(int mod)
-        {
-            int sign = Math.Sign(mod);
-            isDirty = true;
-
-            if (mod + _value >= MaxValue && sign == 1)
-            {
-                _value = MaxValue;
-            }
-            else if (MaxValue - _value > mod && sign == 1)
-            {
-                _value += mod;
-            }
-            else if(sign == -1)
-            {
-                _value = _value + mod;
-                Debug.Log("Negative Number " + mod);
-            }
-            else
-            {
-                Debug.Log("Can't Math");
-            }
-            
         }
 
         protected virtual int CompareModifierOrder(StatModifier a, StatModifier b)
@@ -90,7 +68,7 @@ namespace Kryz.CharacterStats
         {
             if (statModifiers.Remove(mod))
             {
-                isDirty = true;
+                isMaxValueDirty = true;
                 return true;
             }
             return false;
@@ -104,12 +82,41 @@ namespace Kryz.CharacterStats
             {
                 if (statModifiers[i].Source == source)
                 {
-                    isDirty = true;
+                    isMaxValueDirty = true;
                     didRemove = true;
                     statModifiers.RemoveAt(i);
                 }
             }
             return didRemove;
+        }
+
+        public virtual float ApplyInstantEffect(float instantEffectValue)
+        {
+            int sign = Math.Sign(instantEffectValue);
+            if (sign == -1)
+            {
+                Value += instantEffectValue;
+                if (Value <= 0)
+                {
+                    Value = 0;
+                    isZero = true;
+                }
+                return (float)Math.Round(instantEffectValue, 4);
+            }
+            else if (sign == 1)
+            {
+                if(Value + instantEffectValue >= MaxValue)
+                {
+                    Value = MaxValue;
+                }
+                else
+                {
+                    Value += instantEffectValue;
+                }
+                return (float)Math.Round(instantEffectValue, 4);
+            }
+            Debug.Log("Null Instant Effect or sign issue");
+            return (float)Math.Round(instantEffectValue, 4);
         }
 
         protected virtual float CalculateFinalValue()
@@ -125,6 +132,7 @@ namespace Kryz.CharacterStats
                 {
                     finalValue += mod.Value;
                 }
+
                 else if (mod.Type == StatModType.PercentAdd)
                 {
                     sumPercentAdd += mod.Value;
@@ -134,12 +142,12 @@ namespace Kryz.CharacterStats
                         sumPercentAdd = 0;
                     }
                 }
+
                 else if (mod.Type == StatModType.PercentMult)
                 {
                     finalValue *= 1 + mod.Value;
                 }
             }
-
             return (float)Math.Round(finalValue, 4);
         }
     }

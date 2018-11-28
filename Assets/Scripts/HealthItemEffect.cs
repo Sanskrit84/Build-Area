@@ -8,7 +8,7 @@ public class HealthItemEffect : UsableItemEffect
 
     public override void ExecuteEffect(UsableItem parentitem, Character character)
     {
-        character.Health.AddFlatModifier(HealthAmount);
+        character.Health.ApplyInstantEffect(HealthAmount);
     }
 
     public override string GetDescription()
