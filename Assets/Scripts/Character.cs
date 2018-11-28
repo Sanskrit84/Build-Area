@@ -109,18 +109,19 @@ public class Character : MonoBehaviour
         if (itemSlot.Item is EquippableItem)
         {
             Equip((EquippableItem)itemSlot.Item);
+            //uIHud.UpdateStatValues();
         }
         else if(itemSlot.Item is UsableItem)
         {
             UsableItem usableItem = (UsableItem)itemSlot.Item;
             usableItem.Use(this);
-            uIHud.UpdateStatValues();
             statPanel.UpdateStatValues();
 
             if (usableItem.IsConsumable)
             {
                 inventory.RemoveItem(usableItem);
                 usableItem.Destroy();
+                uIHud.UpdateStatValues();
             }
         }
     }
@@ -218,7 +219,7 @@ public class Character : MonoBehaviour
             if (dragEquipItem != null) dragEquipItem.Unequip(this);
             if (dropEquipItem != null) dropEquipItem.Equip(this);
         }
-        statPanel.UpdateStatValues();
+        UpdateStatValues();
 
         Item draggedItem = dragItemSlot.Item;
         int draggedItemAmount = dragItemSlot.Amount;
@@ -250,10 +251,10 @@ public class Character : MonoBehaviour
                 {
                     inventory.AddItem(previousItem);
                     previousItem.Unequip(this);
-                    statPanel.UpdateStatValues();
+                    UpdateStatValues();
                 }
                 item.Equip(this);
-                statPanel.UpdateStatValues();
+                UpdateStatValues();
                 //inventory.
             }
             else
@@ -268,7 +269,7 @@ public class Character : MonoBehaviour
         if (!inventory.CanAddItem(item) && equipmentPanel.RemoveItem(item))
         {
             item.Unequip(this);
-            statPanel.UpdateStatValues();
+            UpdateStatValues();
             inventory.AddItem(item);
         }
     }
@@ -276,6 +277,7 @@ public class Character : MonoBehaviour
     public void UpdateStatValues()
     {
         statPanel.UpdateStatValues();
+        uIHud.UpdateStatValues();
     }
 
     private ItemContainer openItemContainer;

@@ -16,11 +16,14 @@ public enum EquipmentType
 [CreateAssetMenu(menuName = "Items/Equippable Item")]
 public class EquippableItem : Item
 {
+
+    public int HealthBonus;
     public int StrengthBonus;
     public int AgilityBonus;
     public int IntelligenceBonus;
     public int VitalityBonus;
     [Space]
+    public float HealthPercentBonus;
     public float StrengthPercentBonus;
     public float AgilityPercentBonus;
     public float IntelligencePercentBonus;
@@ -40,6 +43,8 @@ public class EquippableItem : Item
 
     public void Equip(Character c)
     {
+        if (HealthBonus != 0)
+            c.Health.AddModifier(new StatModifier(HealthBonus, StatModType.Flat, this));
         if (StrengthBonus != 0)
             c.Strength.AddModifier(new StatModifier(StrengthBonus, StatModType.Flat, this));
         if (AgilityBonus != 0)
@@ -49,6 +54,8 @@ public class EquippableItem : Item
         if (AgilityBonus != 0)
             c.Vitality.AddModifier(new StatModifier(VitalityBonus, StatModType.Flat, this));
 
+        if (HealthPercentBonus != 0)
+            c.Health.AddModifier(new StatModifier(HealthPercentBonus, StatModType.PercentMult, this));
         if (StrengthPercentBonus != 0)
             c.Strength.AddModifier(new StatModifier(StrengthPercentBonus, StatModType.PercentMult, this));
         if (AgilityPercentBonus != 0)
@@ -62,6 +69,7 @@ public class EquippableItem : Item
 
     public void Unequip(Character c)
     {
+        c.Health.RemoveAllModifiersFromSource(this);
         c.Strength.RemoveAllModifiersFromSource(this);
         c.Agility.RemoveAllModifiersFromSource(this);
         c.Intelligence.RemoveAllModifiersFromSource(this);
@@ -77,11 +85,13 @@ public class EquippableItem : Item
     {
         sb.Length = 0;
 
+        AddStat(StrengthBonus, "Health");
         AddStat(StrengthBonus, "Strength");
         AddStat(AgilityBonus, "Agility");
         AddStat(IntelligenceBonus, "Intelligence");
         AddStat(VitalityBonus, "Vitality");
 
+        AddStat(HealthPercentBonus, "Health", isPercent: true);
         AddStat(StrengthPercentBonus, "Strength", isPercent: true);
         AddStat(AgilityPercentBonus, "Agility", isPercent: true);
         AddStat(IntelligencePercentBonus, "Intelligence", isPercent: true);

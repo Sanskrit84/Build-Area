@@ -15,10 +15,12 @@ MonoBehaviour:
   ItemName: Armour
   Icon: {fileID: 21300000, guid: 73d29a1bc29c1af4bb0f7a01cf7facd2, type: 3}
   MaximumStacks: 1
+  HealthBonus: 5
   StrengthBonus: 2
   AgilityBonus: 1
   IntelligenceBonus: 1
   VitalityBonus: 5
+  HealthPercentBonus: 0.1
   StrengthPercentBonus: 0
   AgilityPercentBonus: 0
   IntelligencePercentBonus: 0
